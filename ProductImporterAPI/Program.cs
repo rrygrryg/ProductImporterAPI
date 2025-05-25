@@ -11,6 +11,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.AddSingleton<ProductImporterAPI.Services.DatabaseInitializer>();
 
 // Rejestrujemy nasz kontekst Dappera oraz repozytoria
 builder.Services.AddSingleton<DapperContext>();
@@ -29,3 +30,9 @@ app.UseHttpsRedirection();
 app.UseAuthorization();
 app.MapControllers();
 app.Run();
+// Inicjalizacja bazy danych
+using (var scope = app.Services.CreateScope())
+{
+    var dbInit = scope.ServiceProvider.GetRequiredService<ProductImporterAPI.Services.DatabaseInitializer>();
+    dbInit.EnsureDatabaseExists();
+}
