@@ -39,7 +39,7 @@ namespace ProductImporterAPI.Middleware
         }
     }
 
-    // Extension to simplify middleware registration
+    // rozszerzenie do prostej rejestracji
     public static class ExceptionMiddlewareExtensions
     {
         public static IApplicationBuilder UseExceptionHandling(this IApplicationBuilder builder)
