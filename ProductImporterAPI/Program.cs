@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using ProductImporterAPI.Data;
+using ProductImporterAPI.Middleware;
 using ProductImporterAPI.Repositories;
 using ProductImporterAPI.Services;
 
@@ -19,6 +20,7 @@ builder.Services.AddScoped<ProductRepository>();
 builder.Services.AddScoped<CsvImportService>();
 
 var app = builder.Build();
+app.UseExceptionHandling();
 
 if (app.Environment.IsDevelopment())
 {
